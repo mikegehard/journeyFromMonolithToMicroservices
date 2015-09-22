@@ -7,4 +7,5 @@ repositories {
 
 dependencies {
     compile("org.springframework.cloud:spring-cloud-starter-feign:1.1.0.M1")
+    compile("org.springframework.cloud:spring-cloud-starter-hystrix:1.1.0.M1")
 }

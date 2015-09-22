@@ -1,5 +1,7 @@
 package com.example.ums;
 
+import com.example.billing.Client;
+import com.example.billing.Service;
 import com.example.subscriptions.SubscriptionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +19,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = {"com.example.billing"})
+@EnableCircuitBreaker
 public class Application implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -29,6 +33,9 @@ public class Application implements CommandLineRunner {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    Client billingclient;
+
     @Override
     public void run(String... strings) throws Exception {
         logger.info("********Setting up database********");
@@ -40,5 +47,10 @@ public class Application implements CommandLineRunner {
     @Bean
     public SubscriptionRepository subscriptionRepository() {
         return new SubscriptionRepository(datasource);
+    }
+
+    @Bean
+    public Service billingService(){
+        return new Service(billingclient);
     }
 }

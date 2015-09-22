@@ -1,6 +1,6 @@
 package com.example.ums.subscriptions;
 
-import com.example.billing.Client;
+import com.example.billing.Service;
 import com.example.email.SendEmail;
 import com.example.subscriptions.CreateSubscription;
 import com.example.subscriptions.Subscription;
@@ -24,7 +24,7 @@ public class Controller {
     SubscriptionRepository subscriptions;
 
     @Autowired
-    Client billingClient;
+    Service billingService;
 
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Subscription> index() {
@@ -36,7 +36,7 @@ public class Controller {
 
         SendEmail emailSender = new SendEmail();
 
-        new CreateSubscription(billingClient, emailSender, subscriptions)
+        new CreateSubscription(billingService, emailSender, subscriptions)
                 .run(params.get("userId"), params.get("packageId"));
 
         return new ResponseEntity<>(HttpStatus.CREATED);

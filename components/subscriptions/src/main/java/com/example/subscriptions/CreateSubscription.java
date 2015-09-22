@@ -2,25 +2,26 @@ package com.example.subscriptions;
 
 import com.example.billing.BillingRequest;
 import com.example.billing.Client;
+import com.example.billing.Service;
 import com.example.email.SendEmail;
 
 public class CreateSubscription {
 
-    private final Client billingClient;
+    private final Service billingService;
     private final SendEmail emailSender;
     private final SubscriptionRepository subscriptions;
 
     public CreateSubscription(
-            Client billingClient,
+            Service billingService,
             SendEmail emailSender, SubscriptionRepository subscriptions) {
-        this.billingClient = billingClient;
+        this.billingService = billingService;
         this.emailSender = emailSender;
         this.subscriptions = subscriptions;
     }
 
     public void run(String userId, String packageId) {
         subscriptions.create(new Subscription(userId, packageId));
-        billingClient.billUser(new BillingRequest(userId, 100));
+        billingService.billUser(new BillingRequest(userId, 100));
         emailSender.run("me@example.com", "Subscription Created", "Some email body");
     }
 }
