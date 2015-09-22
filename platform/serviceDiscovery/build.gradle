@@ -18,7 +18,7 @@ apply plugin: 'spring-boot'
 apply plugin: 'io.spring.dependency-management'
 
 jar {
-    baseName = 'billing'
+    baseName = 'service-discovery'
     version = '0.0.1-SNAPSHOT'
 }
 
@@ -36,12 +36,5 @@ dependencyManagement {
 }
 
 dependencies {
-    compile(project(":components/payments"))
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-actuator")
-    compile("org.springframework.cloud:spring-cloud-starter-eureka")
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.6'
+    compile("org.springframework.cloud:spring-cloud-starter-eureka-server")
 }

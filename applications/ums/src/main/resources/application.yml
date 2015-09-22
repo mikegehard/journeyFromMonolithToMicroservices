@@ -1,4 +1,11 @@
 server:
   port: 8080
 
-billingEndpoint: http://localhost:8081
+spring:
+  application:
+    name: user-management
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

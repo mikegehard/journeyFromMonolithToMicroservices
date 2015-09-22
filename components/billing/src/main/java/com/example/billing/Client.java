@@ -1,19 +1,11 @@
 package com.example.billing;
 
-import org.springframework.web.client.RestOperations;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-public class Client {
-
-    private final RestOperations restTemplate;
-    private final String serviceEndpoint;
-
-    public Client(String serviceEndpoint) {
-        this.restTemplate = new RestTemplate();
-        this.serviceEndpoint = serviceEndpoint;
-    }
-
-    public void billUser(String userId, int amount) {
-        restTemplate.postForEntity(serviceEndpoint + "/reocurringPayment", amount, String.class);
-    }
+@FeignClient("billing")
+public interface Client {
+    @RequestMapping(method = RequestMethod.POST, value = "/reocurringPayment", consumes = "application/json")
+    void billUser(BillingRequest request);
 }
