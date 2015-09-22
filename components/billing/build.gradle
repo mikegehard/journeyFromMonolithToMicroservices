@@ -1,3 +1,10 @@
+repositories {
+    mavenCentral()
+    maven {
+        url 'http://repo.spring.io/milestone'
+    }
+}
+
 dependencies {
-    compile(project(":components/payments"))
+    compile("org.springframework.boot:spring-boot-starter-web:1.3.0.M5")
 }

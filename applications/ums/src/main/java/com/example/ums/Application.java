@@ -1,9 +1,11 @@
 package com.example.ums;
 
+import com.example.billing.Client;
 import com.example.subscriptions.SubscriptionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,6 +27,9 @@ public class Application implements CommandLineRunner {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Value("${billingEndpoint}")
+    String billingEndpoint;
+
     @Override
     public void run(String... strings) throws Exception {
         logger.info("********Setting up database********");
@@ -36,5 +41,10 @@ public class Application implements CommandLineRunner {
     @Bean
     public SubscriptionRepository subscriptionRepository() {
         return new SubscriptionRepository(datasource);
+    }
+
+    @Bean
+    public Client billingClient() {
+        return new Client(billingEndpoint);
     }
 }

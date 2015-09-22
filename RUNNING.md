@@ -2,7 +2,7 @@
 
 ## Building the standalone jar
 
-Run `../../gradlew build` from a command line.
+Run `../../gradlew build -x test` from a command line.
 
 ## Running the standalone jar
 
