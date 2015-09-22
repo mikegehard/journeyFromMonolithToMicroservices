@@ -26,6 +26,9 @@ public class Controller {
     @Autowired
     Service billingService;
 
+    @Autowired
+    SendEmail emailSender;
+
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Subscription> index() {
         return subscriptions.all();
@@ -33,8 +36,6 @@ public class Controller {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String> create(@RequestBody Map<String, String> params) {
-
-        SendEmail emailSender = new SendEmail();
 
         new CreateSubscription(billingService, emailSender, subscriptions)
                 .run(params.get("userId"), params.get("packageId"));

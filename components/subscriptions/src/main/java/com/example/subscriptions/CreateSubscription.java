@@ -1,8 +1,8 @@
 package com.example.subscriptions;
 
 import com.example.billing.BillingRequest;
-import com.example.billing.Client;
 import com.example.billing.Service;
+import com.example.email.EmailMessage;
 import com.example.email.SendEmail;
 
 public class CreateSubscription {
@@ -22,6 +22,6 @@ public class CreateSubscription {
     public void run(String userId, String packageId) {
         subscriptions.create(new Subscription(userId, packageId));
         billingService.billUser(new BillingRequest(userId, 100));
-        emailSender.run("me@example.com", "Subscription Created", "Some email body");
+        emailSender.run(new EmailMessage("me@example.com", "Subscription Created", "Some email body"));
     }
 }

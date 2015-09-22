@@ -5,6 +5,8 @@ spring:
   application:
     name: user-management
 
+emailQueueName: send-email
+
 eureka:
   client:
     serviceUrl:
