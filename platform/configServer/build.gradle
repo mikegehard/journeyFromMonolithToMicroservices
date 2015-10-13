@@ -18,7 +18,7 @@ apply plugin: 'spring-boot'
 apply plugin: 'io.spring.dependency-management'
 
 jar {
-    baseName = 'ums'
+    baseName = 'config-server'
     version = '0.0.1-SNAPSHOT'
 }
 
@@ -31,18 +31,10 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'org.springframework.cloud:spring-cloud-netflix:1.1.0.M1'
         mavenBom 'org.springframework.cloud:spring-cloud-config:1.1.0.M1'
     }
 }
 
 dependencies {
-    compile(project(":components/subscriptions"))
-    compile(project(":components/email"))
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-jdbc")
-    compile("org.springframework.boot:spring-boot-starter-actuator")
-    compile("org.springframework.cloud:spring-cloud-starter-eureka")
-    compile("org.springframework.cloud:spring-cloud-starter-config")
-    compile("com.h2database:h2")
+    compile("org.springframework.cloud:spring-cloud-config-server")
 }

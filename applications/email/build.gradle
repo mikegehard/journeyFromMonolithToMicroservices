@@ -29,8 +29,15 @@ repositories {
     }
 }
 
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-config:1.1.0.M1'
+    }
+}
+
 dependencies {
     compile(project(":components/email"))
     compile("org.springframework.boot:spring-boot-starter-amqp")
     compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.cloud:spring-cloud-starter-config")
 }

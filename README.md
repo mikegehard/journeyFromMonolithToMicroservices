@@ -19,6 +19,7 @@ v2      Billing component promoted to a service
 v3      Add Eureka service discovery to allow easy service communication
 v4      Add Hystrix for service resiliency
 v5      Add asynchronous processing with RabbitMQ
+v6      Use Spring Cloud Configuration server
 
 ```
 

@@ -32,6 +32,7 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom 'org.springframework.cloud:spring-cloud-netflix:1.1.0.M1'
+        mavenBom 'org.springframework.cloud:spring-cloud-config:1.1.0.M1'
     }
 }
 
@@ -40,6 +41,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.cloud:spring-cloud-starter-eureka")
+    compile("org.springframework.cloud:spring-cloud-starter-config")
 }
 
 task wrapper(type: Wrapper) {
