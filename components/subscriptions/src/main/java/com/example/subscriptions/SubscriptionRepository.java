@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import java.util.HashMap;
 import java.util.List;
 
-public class SubscriptionRepository {
+class SubscriptionRepository {
     private NamedParameterJdbcTemplate datasource;
 
     public SubscriptionRepository(NamedParameterJdbcTemplate datasource){

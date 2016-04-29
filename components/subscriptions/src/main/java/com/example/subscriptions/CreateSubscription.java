@@ -4,6 +4,7 @@ import com.example.billing.BillingRequest;
 import com.example.billing.Service;
 import com.example.email.EmailMessage;
 import com.example.email.SendEmail;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 public class CreateSubscription {
 
@@ -13,10 +14,10 @@ public class CreateSubscription {
 
     public CreateSubscription(
             Service billingService,
-            SendEmail emailSender, SubscriptionRepository subscriptions) {
+            SendEmail emailSender, NamedParameterJdbcTemplate jdbcConnection) {
         this.billingService = billingService;
         this.emailSender = emailSender;
-        this.subscriptions = subscriptions;
+        this.subscriptions = new SubscriptionRepository(jdbcConnection);
     }
 
     public void run(String userId, String packageId) {
